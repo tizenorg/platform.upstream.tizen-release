@@ -12,6 +12,9 @@ Provides:	system-release = %{version}-%{release}
 Provides:	tizen-release = %{version}-%{release}
 BuildArch:	noarch
 
+#HACK
+Provides:   lsb = 4.1
+
 %description
 Tizen release files such as various /etc/ files that define the release.
 
