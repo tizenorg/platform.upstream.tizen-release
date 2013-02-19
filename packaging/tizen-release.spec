@@ -23,13 +23,17 @@ Tizen release files such as various /etc/ files that define the release.
 %build
 
 %install
-rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/etc
-echo "Tizen release %{dist_version} (%{release_name})" > $RPM_BUILD_ROOT/etc/tizen-release
+rm -rf $%{buildroot}
+install -d $%{buildroot}/etc
+cat > $%{buildroot}/etc/tizen-release <<EOF
+Tizen %{dist_version} (%arch)
+VERSION = %{version}
+CODENAME = Next
+EOF
 
-ln -s tizen-release $RPM_BUILD_ROOT/etc/system-release
+ln -s tizen-release $%{buildroot}/etc/system-release
 
-cat > $RPM_BUILD_ROOT/etc/os-release <<EOF
+cat > $%{buildroot}/etc/os-release <<EOF
 NAME=Tizen
 VERSION="%{dist_version} (%{release_name})"
 ID=tizen
