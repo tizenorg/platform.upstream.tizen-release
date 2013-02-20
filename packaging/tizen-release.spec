@@ -10,7 +10,6 @@ Group:		System/Base
 URL:		http://www.tizen.com
 Provides:	system-release = %{version}-%{release}
 Provides:	tizen-release = %{version}-%{release}
-BuildArch:	noarch
 
 #HACK
 Provides:   lsb = 4.1
@@ -26,7 +25,7 @@ Tizen release files such as various /etc/ files that define the release.
 rm -rf %{buildroot}
 install -d %{buildroot}/etc
 cat > %{buildroot}/etc/tizen-release <<EOF
-Tizen %{dist_version} (%arch)
+Tizen %{dist_version} (%{_arch})
 VERSION = %{version}
 CODENAME = Next
 EOF
