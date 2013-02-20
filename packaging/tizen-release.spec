@@ -27,6 +27,7 @@ Tizen release files such as various /etc/ files that define the release.
 %define _tarch ia32
 %else
 %define _tarch %{_arch}
+%endif
 
 
 rm -rf %{buildroot}
