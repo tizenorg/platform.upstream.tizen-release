@@ -29,7 +29,6 @@ Tizen release files such as various /etc/ files that define the release.
 %define _tarch %{_arch}
 %endif
 
-
 rm -rf %{buildroot}
 install -d %{buildroot}/etc
 cat > %{buildroot}/etc/tizen-release <<EOF
@@ -49,7 +48,6 @@ PRETTY_NAME="Tizen %{dist_version} (%{release_name})"
 ANSI_COLOR="0;36"
 CPE_NAME="cpe:/o:tizen:tizen:%{dist_version}"
 EOF
-
 
 mkdir -p $RPM_BUILD_ROOT/etc/products.d
 cat >$RPM_BUILD_ROOT/etc/products.d/tizen.prod << EOF
@@ -97,7 +95,7 @@ cat >$RPM_BUILD_ROOT/etc/products.d/tizen.prod << EOF
   <urls>
     <url name="releasenotes">http://www.tizen.org</url>
     <url name="register">http://www.tizen.org/</url>
-    <url name="repository">https://download.tz.otcshare.org/snapshots/trunk/pc/latest/repos/pc/%{_tarch}/packages/</url>
+    <url name="repository">https://download.tizen.org/snapshots/tizen/common/latest/repos/tizen/%{_tarch}/packages/</url>
   </urls>
   <buildconfig>
     <producttheme>Tizen</producttheme>
@@ -122,3 +120,4 @@ ln -s tizen.prod $RPM_BUILD_ROOT/etc/products.d/baseproduct
 %config %attr(0644,root,root) /etc/os-release
 /etc/system-release
 /etc/products.d
+
