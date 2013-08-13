@@ -1,18 +1,20 @@
 %define release_name Tizen Next
 %define dist_version 3.0.0
 
-Summary:	Tizen release files
-Name:		tizen-release
-Version:	3.0.0
-Release:	2
-License:	GPL-2.0
-Group:		System/Base
-URL:		http://www.tizen.com
-Provides:	system-release = %{version}-%{release}
-Provides:	tizen-release = %{version}-%{release}
+Name:           tizen-release
+Version:        3.0.0
+Release:        2
+License:        GPL-2.0
+Summary:        Tizen release files
+Url:            http://www.tizen.com
+Group:          System/Base
+Provides:       system-release = %{version}
+Provides:       tizen-release = %{version}
+Provides:       product()
+Provides:       product(Tizen) = %{version}
 
 #HACK
-Provides:   lsb = 4.1
+Provides:       lsb = 4.1
 
 %description
 Tizen release files such as various /etc/ files that define the release.
@@ -29,17 +31,16 @@ Tizen release files such as various /etc/ files that define the release.
 %define _tarch %{_arch}
 %endif
 
-rm -rf %{buildroot}
 install -d %{buildroot}/etc
-cat > %{buildroot}/etc/tizen-release <<EOF
+cat > %{buildroot}%{_sysconfdir}/tizen-release <<EOF
 Tizen %{dist_version} (%{_arch})
 VERSION = %{version}
 CODENAME = Next
 EOF
 
-ln -s tizen-release %{buildroot}/etc/system-release
+ln -s tizen-release %{buildroot}%{_sysconfdir}/system-release
 
-cat > %{buildroot}/etc/os-release <<EOF
+cat > %{buildroot}%{_sysconfdir}/os-release <<EOF
 NAME=Tizen
 VERSION="%{dist_version} (%{release_name})"
 ID=tizen
@@ -49,8 +50,8 @@ ANSI_COLOR="0;36"
 CPE_NAME="cpe:/o:tizen:tizen:%{dist_version}"
 EOF
 
-mkdir -p $RPM_BUILD_ROOT/etc/products.d
-cat >$RPM_BUILD_ROOT/etc/products.d/tizen.prod << EOF
+mkdir -p %{buildroot}%{_sysconfdir}/products.d
+cat >%{buildroot}%{_sysconfdir}/products.d/tizen.prod << EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <product schemeversion="0">
   <vendor>Tizen.org</vendor>
@@ -112,12 +113,12 @@ cat >$RPM_BUILD_ROOT/etc/products.d/tizen.prod << EOF
 EOF
 
 # this is a base product, create symlink
-ln -s tizen.prod $RPM_BUILD_ROOT/etc/products.d/baseproduct
+ln -s tizen.prod %{buildroot}%{_sysconfdir}/products.d/baseproduct
 
 
 %files
-%config %attr(0644,root,root) /etc/tizen-release
-%config %attr(0644,root,root) /etc/os-release
-/etc/system-release
-/etc/products.d
+%config %attr(0644,root,root) %{_sysconfdir}/tizen-release
+%config %attr(0644,root,root) %{_sysconfdir}/os-release
+%{_sysconfdir}/system-release
+%{_sysconfdir}/products.d
 
