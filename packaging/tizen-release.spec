@@ -116,9 +116,41 @@ EOF
 ln -s tizen.prod %{buildroot}%{_sysconfdir}/products.d/baseproduct
 
 
+# generate tizen-build.conf
+
+
+cat > %{buildroot}%{_sysconfdir}/tizen-build.conf <<'EOF'
+TZ_BUILD_RELEASE_NAME="%{release_name}"
+TZ_BUILD_VERSION=%{tizen_version}
+TZ_BUILD_FULLVER=%{tizen_full_version}
+
+TZ_BUILD_PROFILE=%{profile}
+TZ_BUILD_PROJECT=%{_project}
+TZ_BUILD_VENDOR=%{vendor}
+TZ_BUILD_REPO=%{_repository}
+TZ_BUILD_ARCH=%{_arch}
+
+TZ_BUILD_ID=@BUILD_ID@
+TZ_BUILD_DATE=@BUILD_DATE@
+
+TZ_BUILD_URL=http://download.tizen.org
+TZ_BUILD_SNAPSHOT_URL=${TZ_BUILD_URL}/snapshots/tizen/%{profile}/
+TZ_BUILD_DAILY_URL=${TZ_BUILD_URL}/releases/daily/tizen/%{profile}/
+TZ_BUILD_WEEKLY_URL=${TZ_BUILD_URL}/releases/weekly/tizen/%{profile}/
+TZ_BUILD_MILESTONE_URL=${TZ_BUILD_URL}/releases/milestone/tizen/%{profile}/
+
+TZ_BUILD_WITH_MESA=%{?_with_mesa}
+TZ_BUILD_WITH_WAYLAND=%{?_with_wayland}
+TZ_BUILD_WITH_RDP=%{?_with_rdp}
+TZ_BUILD_WITH_X=%{?_with_x}
+TZ_BUILD_WITH_EMULATOR=%{?_with_emulator}
+
+EOF
+
 %files
 %config %attr(0644,root,root) %{_sysconfdir}/tizen-release
 %config %attr(0644,root,root) %{_sysconfdir}/os-release
+%config %attr(0444,root,root) %{_sysconfdir}/tizen-build.conf
 %{_sysconfdir}/system-release
 %{_sysconfdir}/products.d
 
