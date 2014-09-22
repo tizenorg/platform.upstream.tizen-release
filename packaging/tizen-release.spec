@@ -1,9 +1,6 @@
-%define release_name Tizen Next
-%define dist_version 3.0.0
-
 Name:           tizen-release
-Version:        3.0.0
-Release:        2
+Version:        %{tizen_full_version}
+Release:        0
 License:        GPL-2.0
 Summary:        Tizen release files
 Url:            http://www.tizen.com
@@ -33,21 +30,21 @@ Tizen release files such as various /etc/ files that define the release.
 
 install -d %{buildroot}/etc
 cat > %{buildroot}%{_sysconfdir}/tizen-release <<EOF
-Tizen %{dist_version} (%{_arch})
-VERSION = %{version}
+%{release_name} %{tizen_full_version} (%{_arch})
+VERSION = %{tizen_full_version}
 CODENAME = Next
 EOF
 
 ln -s tizen-release %{buildroot}%{_sysconfdir}/system-release
 
 cat > %{buildroot}%{_sysconfdir}/os-release <<EOF
-NAME=Tizen
-VERSION="%{dist_version} (%{release_name})"
+NAMEn
+VERSION="%{tizen_full_version} (%{release_name})"
 ID=tizen
-VERSION_ID=%{dist_version}
-PRETTY_NAME="Tizen %{dist_version} (%{release_name})"
+VERSION_ID=%{tizen_full_version}
+PRETTY_NAME="Tizen %{tizen_full_version} (%{release_name})"
 ANSI_COLOR="0;36"
-CPE_NAME="cpe:/o:tizen:tizen:%{dist_version}"
+CPE_NAME="cpe:/o:tizen:tizen:%{tizen_full_version}"
 EOF
 
 mkdir -p %{buildroot}%{_sysconfdir}/products.d
@@ -56,12 +53,12 @@ cat >%{buildroot}%{_sysconfdir}/products.d/tizen.prod << EOF
 <product schemeversion="0">
   <vendor>Tizen.org</vendor>
   <name>Tizen</name>
-  <version>%{version}</version>
-  <release>%{release}</release>
+  <version>%{tizen_full_version}</version>
+  <release>%{release_name}</release>
   <arch>%{_target_cpu}</arch>
   <productline>Tizen</productline>
   <register>
-    <target>tizen-%{version}-%{_target_cpu}</target>
+    <target>tizen-%{tizen_full_version}-%{_target_cpu}</target>
     <release></release>
     <repositories>
     </repositories>
@@ -96,15 +93,15 @@ cat >%{buildroot}%{_sysconfdir}/products.d/tizen.prod << EOF
   <urls>
     <url name="releasenotes">http://www.tizen.org</url>
     <url name="register">http://www.tizen.org/</url>
-    <url name="repository">https://download.tizen.org/snapshots/tizen/common/latest/repos/tizen/%{_tarch}/packages/</url>
+    <url name="repository">https://download.tizen.org/snapshots/tizen/%{profile}/latest/repos/%{_repository}/packages/%{_tarch}/</url>
   </urls>
   <buildconfig>
     <producttheme>Tizen</producttheme>
-    <betaversion>Milestone 1</betaversion>
+    <betaversion></betaversion>
   </buildconfig>
   <installconfig>
     <defaultlang>en_US</defaultlang>
-    <releasepackage name="tizen-release" flag="EQ" version="3.0.0" release="%{release}" />
+    <releasepackage name="tizen-release" flag="EQ" version="%{tizen_full_version}" release="%{release}" />
     <distribution>Tizen</distribution>
   </installconfig>
   <runtimeconfig />
