@@ -131,10 +131,10 @@ TZ_BUILD_ID=@BUILD_ID@
 TZ_BUILD_DATE=@BUILD_DATE@
 
 TZ_BUILD_URL=http://download.tizen.org
-TZ_BUILD_SNAPSHOT_URL=${TZ_BUILD_URL}/snapshots/tizen/%{profile}/
-TZ_BUILD_DAILY_URL=${TZ_BUILD_URL}/releases/daily/tizen/%{profile}/
-TZ_BUILD_WEEKLY_URL=${TZ_BUILD_URL}/releases/weekly/tizen/%{profile}/
-TZ_BUILD_MILESTONE_URL=${TZ_BUILD_URL}/releases/milestone/tizen/%{profile}/
+TZ_BUILD_SNAPSHOT_URL=${TZ_BUILD_URL}/snapshots/tizen/common-3.0.2014.Q3/
+TZ_BUILD_DAILY_URL=${TZ_BUILD_URL}/releases/daily/tizen/common-3.0.2014.Q3/
+TZ_BUILD_WEEKLY_URL=${TZ_BUILD_URL}/releases/weekly/tizen/common-3.0.2014.Q3/
+TZ_BUILD_MILESTONE_URL=${TZ_BUILD_URL}/releases/milestone/tizen/common-3.0.2014.Q3/
 
 TZ_BUILD_WITH_MESA=%{?_with_mesa}
 TZ_BUILD_WITH_WAYLAND=%{?_with_wayland}
