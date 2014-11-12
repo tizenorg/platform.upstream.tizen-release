@@ -129,6 +129,8 @@ TZ_BUILD_ARCH=%{_arch}
 
 TZ_BUILD_ID=@BUILD_ID@
 TZ_BUILD_DATE=@BUILD_DATE@
+TZ_BUILD_TIME=@BUILD_TIME@
+TZ_BUILD_TS=@BUILD_TS@
 
 TZ_BUILD_URL=http://download.tizen.org
 TZ_BUILD_SNAPSHOT_URL=${TZ_BUILD_URL}/snapshots/tizen/%{profile}/
