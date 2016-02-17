@@ -1,3 +1,11 @@
+%define tizen_version_major 3
+%define tizen_version_minor 0
+%define tizen_version_patch 0
+
+%define tizen_version %{tizen_version_major}.%{tizen_version_minor}
+%define tizen_full_version %{tizen_version}.%{tizen_version_patch}
+%define vendor tizen
+
 Name:           tizen-release
 Version:        %{tizen_full_version}
 Release:        0
