@@ -26,6 +26,21 @@ Tizen release files such as various /etc/ files that define the release.
 
 %prep
 
+%define release_type_default eng
+
+%if z%{?tizen_build_devel_mode} == z || z%{?tizen_build_binary_release_type_eng} == z
+	%define release_type %release_type_default
+%else
+	%if 0%{?tizen_build_devel_mode} == 1 || 0%{?tizen_build_devel_mode} == 1
+		%define release_type %release_type_default
+	%else
+		%define release_type user
+	%endif
+%endif
+
+%define build_variant_default NONE
+%define build_variant %{?tizen_build_variant}%{?!tizen_build_variant:%{build_variant_default}}
+
 %build
 
 %install
@@ -128,6 +143,8 @@ cat > %{buildroot}%{_sysconfdir}/tizen-build.conf <<'EOF'
 TZ_BUILD_RELEASE_NAME="%{release_name}"
 TZ_BUILD_VERSION=%{tizen_version}
 TZ_BUILD_FULLVER=%{tizen_full_version}
+TZ_BUILD_RELEASE_TYPE=%{release_type}
+TZ_BUILD_VARIANT=%{build_variant}
 
 TZ_BUILD_PROFILE=%{profile}
 TZ_BUILD_PROJECT=%{_project}
